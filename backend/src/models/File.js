@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const FIle = new mongoose.Schema(
+const File = new mongoose.Schema(
     {
         title: {
             type: String,
@@ -12,7 +12,14 @@ const FIle = new mongoose.Schema(
         }
     },
     {
-        timestamps: true
-    });
+        timestamps: true,
+        toObject: { virtuals: true },
+        toJSON: { virtuals: true }
+    }
+);
 
-module.exports = mongoose.model("FIle", FIle);
+File.virtual('url').get(function () {
+    return `http://localhost:3333/files/${encodeURIComponent(this.path)}`
+});
+
+module.exports = mongoose.model("File", File);
