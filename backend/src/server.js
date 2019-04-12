@@ -13,7 +13,7 @@ const io = require('socket.io')(server);
 io.on('connection', socket => {
     socket.on('connectRoom', box => {
         socket.join(box);
-    })
+    });
 });
 
 mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-nwedj.mongodb.net/omnistack?retryWrites=true', {
