@@ -29,7 +29,7 @@ export default class Box extends Component {
 
         io.emit("connectRoom", box);
         io.on("file", data => {
-            console.log(data)
+            this.setState({ box: { ...this.state.box, files: [data, ...this.state.box.files] } });
         });
     }
 
@@ -61,7 +61,7 @@ export default class Box extends Component {
                 <ul>
                     {this.state.box.files && this.state.box.files.map(file => (
                         <li key={file._id}>
-                            <a className="fileInfo" href={file.url} target="_blank" >
+                            <a className="fileInfo" href={file.url} rel="noopener noreferrer" target="_blank" >
                                 <MdInsertDriveFile size={24} color="#A5CFFF" />
                                 <strong>{file.title}</strong>
                             </a>
